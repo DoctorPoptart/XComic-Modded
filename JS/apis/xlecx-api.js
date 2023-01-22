@@ -123,7 +123,7 @@ class XlecxAPI {
 							"pages": pages,
 							"url": href
 						})
-					} catch(e) {console.log(e)}
+					} catch(e) {}
 				}
 			}
 
@@ -289,7 +289,7 @@ class XlecxAPI {
 							"pages": pages,
 							"url": href
 						})
-					} catch(e) {console.log(e)}
+					} catch(e) {}
 				}
 
 				// Pagination
@@ -438,31 +438,30 @@ class XlecxAPI {
 				// Related
 				if (related == true) {
 					li = htmlDoc.getElementsByClassName("sect__content")[1].children
-					if (gg.length > 0) {
-						if (li.length > 0) {
-							arr.related = []
-							for (let i = 0; i < li.length; i++) {
+					console.log(li)
+					if (li.length > 0) {
+						arr.related = []
+						for (let i = 0; i < li.length; i++) {
 
-								let pages = undefined
-								let thumbLabels = li[i].getElementsByClassName("thumb__label")
-								if (thumbLabels.length > 0) {
-									pages = thumbLabels[0].textContent.replace(/\D/g,'')+" Pages"
-								}
-
-								let href = li[i].getAttribute("href")
-								let images = li[i].getElementsByTagName("img")
-								let image = "https://xlecx.one/templates/VideoTrex/dleimages/no_image.jpg"
-								if (images.length > 0) image = images[0].getAttribute("src")
-								try {
-									arr.content.push({
-										"id": this.#lastSlash(href),
-										"title": li[i].getElementsByClassName("thumb__title")[0].textContent,
-										"thumb": image,
-										"pages": pages,
-										"url": href
-									})
-								} catch(e) {console.log(e)}
+							let pages = undefined
+							let thumbLabels = li[i].getElementsByClassName("thumb__label")
+							if (thumbLabels.length > 0) {
+								pages = thumbLabels[0].textContent.replace(/\D/g,'')+" Pages"
 							}
+
+							let href = li[i].getAttribute("href")
+							let images = li[i].getElementsByTagName("img")
+							let image = "https://xlecx.one/templates/VideoTrex/dleimages/no_image.jpg"
+							if (images.length > 0) image = images[0].getAttribute("src")
+							try {
+								arr.related.push({
+									"id": this.#lastSlash(href),
+									"title": li[i].getElementsByClassName("thumb__title")[0].textContent,
+									"thumb": image,
+									"pages": pages,
+									"url": href
+								})
+							} catch(e) {}
 						}
 					}
 				}
@@ -518,7 +517,7 @@ class XlecxAPI {
 									"pages": pages,
 									"url": href
 								})
-							} catch(e) {console.log(e)}
+							} catch(e) {}
 						}
 					} else arr = null
 				} else arr = null
@@ -626,7 +625,7 @@ class XlecxAPI {
 							"pages": pages,
 							"url": href
 						})
-					} catch(e) {console.log(e)}
+					} catch(e) {}
 				}
 
 				// Pagination
@@ -710,7 +709,7 @@ class XlecxAPI {
 							"pages": pages,
 							"url": href
 						})
-					} catch(e) {console.log(e)}
+					} catch(e) {}
 				}
 
 				// Pagination
@@ -796,7 +795,7 @@ class XlecxAPI {
 							"pages": pages,
 							"url": href
 						})
-					} catch(e) {console.log(e)}
+					} catch(e) {}
 				}
 
 				// Pagination
@@ -882,7 +881,7 @@ class XlecxAPI {
 							"pages": pages,
 							"url": href
 						})
-					} catch(e) {console.log(e)}
+					} catch(e) {}
 				}
 
 				// Pagination
@@ -978,7 +977,7 @@ class XlecxAPI {
 							"pages": pages,
 							"url": href
 						})
-					} catch(e) {console.log(e)}
+					} catch(e) {}
 				}
 
 				// Pagination

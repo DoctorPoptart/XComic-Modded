@@ -1,9 +1,9 @@
 {
 	"name": "x-comic-downloader",
-	"version": "2.3.3",
+	"version": "1.0.0",
 	"description": "A Software for Downloading Adult and Hentai Comic and Manga and Manage Theme.",
 	"main": "index.js",
-	"author": "Mehdi Enayatzadeh (LowMaster)",
+	"author": "Dr. Poptart",
 	"license": "MIT",
 	"private": true,
 	"keywords": [
@@ -17,8 +17,8 @@
 		"adult"
 	],
 	"build": {
-		"appId": "com.x-comic-downloader.id",
-		"productName": "X Comic Downloader",
+		"appId": "com.x-comic-modded.id",
+		"productName": "XComic Modded",
 		"copyright": "Copyright © 2021 Mehdi Enayatzadeh (LowMaster)",
 		"compression": "maximum",
 		"directories": {
@@ -57,7 +57,7 @@
 		},
 		"win": {
 			"target": "NSIS",
-			"publisherName": "Mehdi Enayatzadeh (LowMaster)",
+			"publisherName": "Dr. Poptart",
 			"icon": "Image/favicon.ico"
 		},
 		"asar": false,
@@ -89,9 +89,9 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/RealLowMaster/X-Comic-Downloader-Project.git"
+		"url": "https://github.com/DoctorPoptart/XComic-Modded"
 	},
 	"bugs": {
-		"url": "https://github.com/RealLowMaster/X-Comic-Downloader-Project/issues"
+		"url": "https://github.com/DoctorPoptart/XComic-Modded/issues"
 	}
 }

@@ -290,210 +290,210 @@ function GetFileLocationForInput(who) {
 }
 
 function CheckUpdate() {
-	if (window.navigator.onLine) {
-		fetch('https://api.npoint.io/1cc57afc1a05329fe920', { method: "GET" }).then(response => {
-			if (!response.ok) {
-				PopAlert('UPDATE->CHECKING->ERR->HTTP: '+response.status, 'danger')
-				return
-			}
-			return response.json()
-		}).then(json => {
-			if (update_number < json.update_number) {
-				new_update = json
-				const releaser = document.getElementById('new-release')
-				releaser.getElementsByTagName('p')[0].textContent = `New Release: v${json.version}`
-				releaser.style.display = 'block'
-			} else PopAlert("UpdateChecker: Your App is Up To Date.")
-		}).catch(err => {
-			if (err == 'TypeError: Failed to fetch') return
-			PopAlert('UPDATE->CHECKING->ERR: '+err, 'danger')
-		})
-	} else if (alert) PopAlert('No Internet Connection.', 'danger')
+	// if (window.navigator.onLine) {
+	// 	fetch('https://api.npoint.io/1cc57afc1a05329fe920', { method: "GET" }).then(response => {
+	// 		if (!response.ok) {
+	// 			PopAlert('UPDATE->CHECKING->ERR->HTTP: '+response.status, 'danger')
+	// 			return
+	// 		}
+	// 		return response.json()
+	// 	}).then(json => {
+	// 		if (update_number < json.update_number) {
+	// 			new_update = json
+	// 			const releaser = document.getElementById('new-release')
+	// 			releaser.getElementsByTagName('p')[0].textContent = `New Release: v${json.version}`
+	// 			releaser.style.display = 'block'
+	// 		} else PopAlert("UpdateChecker: Your App is Up To Date.")
+	// 	}).catch(err => {
+	// 		if (err == 'TypeError: Failed to fetch') return
+	// 		PopAlert('UPDATE->CHECKING->ERR: '+err, 'danger')
+	// 	})
+	// } else if (alert) PopAlert('No Internet Connection.', 'danger')
 }
 
 function UpdateApp() {
-	if (comicDeleting) { PopAlert("You can't Update App When you are Deleting a Comic.", "danger"); return }
-	if (isOptimizing) { PopAlert("You can't Update App When you are Optimzating.", "danger"); return }
-	if (Downloader.HasDownload()) { PopAlert("You can't Update App When you are Downloading Comic.", "danger"); return }
-	if (window.navigator.onLine == false) { PopAlert('You are Offline.', 'danger'); return }
-	if (isUpdating) return
-	isUpdating = true
-	procressPanel.reset(3)
-	procressPanel.config({ miniLog: false, bgClose: false, closeBtn: false })
-	procressPanel.show('Checking Connection...')
+	// if (comicDeleting) { PopAlert("You can't Update App When you are Deleting a Comic.", "danger"); return }
+	// if (isOptimizing) { PopAlert("You can't Update App When you are Optimzating.", "danger"); return }
+	// if (Downloader.HasDownload()) { PopAlert("You can't Update App When you are Downloading Comic.", "danger"); return }
+	// if (window.navigator.onLine == false) { PopAlert('You are Offline.', 'danger'); return }
+	// if (isUpdating) return
+	// isUpdating = true
+	// procressPanel.reset(3)
+	// procressPanel.config({ miniLog: false, bgClose: false, closeBtn: false })
+	// procressPanel.show('Checking Connection...')
 
-	let node_update = false
-	if (new_update.node_modules_updates_number > update_number) {
-		node_update = true
-		procressPanel.changePercent(5)
-	}
+	// let node_update = false
+	// if (new_update.node_modules_updates_number > update_number) {
+	// 	node_update = true
+	// 	procressPanel.changePercent(5)
+	// }
 
-	procressPanel.add('Connected To Update Data.')
-	procressPanel.forward('Downloading Update...')
+	// procressPanel.add('Connected To Update Data.')
+	// procressPanel.forward('Downloading Update...')
 
-	let totalSize = 0, totalBytes = 0, dlSize = 0
-	const dl = new Download(new_update.zip, `${dirTmp}/update.zip`)
-	dl.OnError(err => {
-		error('DownloadUpdate->'+err)
-		procressPanel.reset()
-		isUpdating = false
-	})
+	// let totalSize = 0, totalBytes = 0, dlSize = 0
+	// const dl = new Download(new_update.zip, `${dirTmp}/update.zip`)
+	// dl.OnError(err => {
+	// 	error('DownloadUpdate->'+err)
+	// 	procressPanel.reset()
+	// 	isUpdating = false
+	// })
 
-	dl.OnComplete(filename => {
-		const StreamZip = require('node-stream-zip')
-		const path = require('path')
+	// dl.OnComplete(filename => {
+	// 	const StreamZip = require('node-stream-zip')
+	// 	const path = require('path')
 
-		if (node_update) {
-			procressPanel.add('Complete Downloading Update First Part.')
-			procressPanel.forward('Downloading NodeUpdate...')
-			totalSize = 0, totalBytes = 0, dlSize = 0
-			const dl2 = new Download(new_update.latest_node_modules, `${dirTmp}/node_update.zip`)
-			dl2.OnError(err => {
-				error('DownloadNodeUpdate->'+err)
-				isUpdating = false
-			})
+	// 	if (node_update) {
+	// 		procressPanel.add('Complete Downloading Update First Part.')
+	// 		procressPanel.forward('Downloading NodeUpdate...')
+	// 		totalSize = 0, totalBytes = 0, dlSize = 0
+	// 		const dl2 = new Download(new_update.latest_node_modules, `${dirTmp}/node_update.zip`)
+	// 		dl2.OnError(err => {
+	// 			error('DownloadNodeUpdate->'+err)
+	// 			isUpdating = false
+	// 		})
 
-			dl2.OnComplete(filename2 => {
+	// 		dl2.OnComplete(filename2 => {
 
-				const zip = new StreamZip.async({ file: filename })
+	// 			const zip = new StreamZip.async({ file: filename })
 
-				zip.on('error', err => {
-					error('UnZippingUpdate->'+err)
-					isUpdating = false
-				})
+	// 			zip.on('error', err => {
+	// 				error('UnZippingUpdate->'+err)
+	// 				isUpdating = false
+	// 			})
 
-				zip.entries().then(async entries => {
-					for (const entry of Object.values(entries)) {
-						if (entry.isDirectory) continue
-						const pathname = path.resolve(__dirname, entry.name)
+	// 			zip.entries().then(async entries => {
+	// 				for (const entry of Object.values(entries)) {
+	// 					if (entry.isDirectory) continue
+	// 					const pathname = path.resolve(__dirname, entry.name)
 			
-						try {
-							fs.mkdirSync(
-								path.dirname(pathname),
-								{ recursive: true }
-							)
-							await zip.extract(entry.name, pathname)
-						} catch(err) {
-							procressPanel.add('UnZipFirstPart->:: '+err, 'danger')
-						}
-					}
+	// 					try {
+	// 						fs.mkdirSync(
+	// 							path.dirname(pathname),
+	// 							{ recursive: true }
+	// 						)
+	// 						await zip.extract(entry.name, pathname)
+	// 					} catch(err) {
+	// 						procressPanel.add('UnZipFirstPart->:: '+err, 'danger')
+	// 					}
+	// 				}
 
-					zip.close()
-					try { fs.unlinkSync(filename) } catch(err) { procressPanel.add('DeletingUpdateFile->'+err, 'danger') }
+	// 				zip.close()
+	// 				try { fs.unlinkSync(filename) } catch(err) { procressPanel.add('DeletingUpdateFile->'+err, 'danger') }
 
-					procressPanel.add('Extracte First Part Complete.')
-					procressPanel.forward('Extracting NodeUpdate...')
+	// 				procressPanel.add('Extracte First Part Complete.')
+	// 				procressPanel.forward('Extracting NodeUpdate...')
 
-					const secendZip = new StreamZip.async({ file: filename2 })
+	// 				const secendZip = new StreamZip.async({ file: filename2 })
 
-					secendZip.on('error', err => {
-						error('UnZippingNodeUpdate->'+err)
-						isUpdating = false
-					})
+	// 				secendZip.on('error', err => {
+	// 					error('UnZippingNodeUpdate->'+err)
+	// 					isUpdating = false
+	// 				})
 
-					await secendZip.entries().then(async secendEntries => {
-						for (const entry of Object.values(secendEntries)) {
-							if (entry.isDirectory) continue
-							const pathname = path.resolve(__dirname, entry.name)
+	// 				await secendZip.entries().then(async secendEntries => {
+	// 					for (const entry of Object.values(secendEntries)) {
+	// 						if (entry.isDirectory) continue
+	// 						const pathname = path.resolve(__dirname, entry.name)
 
-							try {
-								fs.mkdirSync(
-									path.dirname(pathname),
-									{ recursive: true }
-								)
-								await secendZip.extract(entry.name, pathname)
-							} catch(err) {
-								procressPanel.add('UnZipNode->'+err, 'danger')
-							}
-						}
+	// 						try {
+	// 							fs.mkdirSync(
+	// 								path.dirname(pathname),
+	// 								{ recursive: true }
+	// 							)
+	// 							await secendZip.extract(entry.name, pathname)
+	// 						} catch(err) {
+	// 							procressPanel.add('UnZipNode->'+err, 'danger')
+	// 						}
+	// 					}
 
-						secendZip.close()
-						try { fs.unlinkSync(filename2) } catch(err) { procressPanel.add('DeletingNodeUpdateFile->'+err, 'danger') }
+	// 					secendZip.close()
+	// 					try { fs.unlinkSync(filename2) } catch(err) { procressPanel.add('DeletingNodeUpdateFile->'+err, 'danger') }
 
-						procressPanel.add('Update Complete.')
-						procressPanel.forward('Closing App...')
-						setTimeout(() => {
-							ThisWindow.removeAllListeners()
-							remote.app.quit()
-						}, 250)
-					}).catch(err => {
-						error('UnZippingNodeUpdateEntries->'+err)
-						isUpdating = false
-					})
-				}).catch(err => {
-					error('UnZippingUpdateEntries->'+err)
-					isUpdating = false
-				})
-			})
+	// 					procressPanel.add('Update Complete.')
+	// 					procressPanel.forward('Closing App...')
+	// 					setTimeout(() => {
+	// 						ThisWindow.removeAllListeners()
+	// 						remote.app.quit()
+	// 					}, 250)
+	// 				}).catch(err => {
+	// 					error('UnZippingNodeUpdateEntries->'+err)
+	// 					isUpdating = false
+	// 				})
+	// 			}).catch(err => {
+	// 				error('UnZippingUpdateEntries->'+err)
+	// 				isUpdating = false
+	// 			})
+	// 		})
 
-			dl2.OnResponse(resp => {
-				totalBytes = parseInt(resp.headers['content-length'])
-				totalSize = formatBytes(totalBytes)
-				procressPanel.text(`Downloading NodeUpdate (0/${totalSize}) (0%/100%)`)
-			})
+	// 		dl2.OnResponse(resp => {
+	// 			totalBytes = parseInt(resp.headers['content-length'])
+	// 			totalSize = formatBytes(totalBytes)
+	// 			procressPanel.text(`Downloading NodeUpdate (0/${totalSize}) (0%/100%)`)
+	// 		})
 
-			dl2.OnData(data => {
-				dlSize += data
-				procressPanel.text(`Downloading Update (${formatBytes(dlSize)}/${totalSize}) (${((dlSize * 100) / totalBytes).toFixed()}%/100%)`)
-			})
+	// 		dl2.OnData(data => {
+	// 			dlSize += data
+	// 			procressPanel.text(`Downloading Update (${formatBytes(dlSize)}/${totalSize}) (${((dlSize * 100) / totalBytes).toFixed()}%/100%)`)
+	// 		})
 
-			dl2.Start()
+	// 		dl2.Start()
 			
-		} else {
-			procressPanel.add('Complete Downloading Update.')
-			procressPanel.forward('Updating...')
-			const zip = new StreamZip.async({ file: filename })
+	// 	} else {
+	// 		procressPanel.add('Complete Downloading Update.')
+	// 		procressPanel.forward('Updating...')
+	// 		const zip = new StreamZip.async({ file: filename })
 
-			zip.on('error', err => {
-				error('UnZippingUpdate->'+err)
-				isUpdating = false
-			})
+	// 		zip.on('error', err => {
+	// 			error('UnZippingUpdate->'+err)
+	// 			isUpdating = false
+	// 		})
 
-			zip.entries().then(async entries => {
-				for (const entry of Object.values(entries)) {
-					if (entry.isDirectory) continue
-					const pathname = path.resolve(__dirname, entry.name)
+	// 		zip.entries().then(async entries => {
+	// 			for (const entry of Object.values(entries)) {
+	// 				if (entry.isDirectory) continue
+	// 				const pathname = path.resolve(__dirname, entry.name)
 		
-					try {
-						fs.mkdirSync(
-							path.dirname(pathname),
-							{ recursive: true }
-						)
-						await zip.extract(entry.name, pathname)
-					} catch(err) {
-						procressPanel.add('UnZip-ExtractFile-ERR:: '+err, 'danger')
-					}
-				}
+	// 				try {
+	// 					fs.mkdirSync(
+	// 						path.dirname(pathname),
+	// 						{ recursive: true }
+	// 					)
+	// 					await zip.extract(entry.name, pathname)
+	// 				} catch(err) {
+	// 					procressPanel.add('UnZip-ExtractFile-ERR:: '+err, 'danger')
+	// 				}
+	// 			}
 
-				zip.close()
-				try { fs.unlinkSync(filename) } catch(err) { procressPanel.add('DeletingUpdateFile->'+err, 'danger') }
+	// 			zip.close()
+	// 			try { fs.unlinkSync(filename) } catch(err) { procressPanel.add('DeletingUpdateFile->'+err, 'danger') }
 
-				procressPanel.add('Update Complete.')
-				procressPanel.forward('Closing App...')
-				isUpdating = false
-				setTimeout(() => {
-					ThisWindow.removeAllListeners()
-					remote.app.quit()
-				}, 250)
-			}).catch(err => {
-				error('UnZippingUpdateEntries->'+err)
-				isUpdating = false
-			})
-		}
-	})
+	// 			procressPanel.add('Update Complete.')
+	// 			procressPanel.forward('Closing App...')
+	// 			isUpdating = false
+	// 			setTimeout(() => {
+	// 				ThisWindow.removeAllListeners()
+	// 				remote.app.quit()
+	// 			}, 250)
+	// 		}).catch(err => {
+	// 			error('UnZippingUpdateEntries->'+err)
+	// 			isUpdating = false
+	// 		})
+	// 	}
+	// })
 
-	dl.OnResponse(resp => {
-		totalBytes = parseInt(resp.headers['content-length'])
-		totalSize = formatBytes(totalBytes)
-		procressPanel.text(`Downloading Update (0/${totalSize}) (0%/100%)`)
-	})
+	// dl.OnResponse(resp => {
+	// 	totalBytes = parseInt(resp.headers['content-length'])
+	// 	totalSize = formatBytes(totalBytes)
+	// 	procressPanel.text(`Downloading Update (0/${totalSize}) (0%/100%)`)
+	// })
 
-	dl.OnData(data => {
-		dlSize += data
-		procressPanel.text(`Downloading Update (${formatBytes(dlSize)}/${totalSize}) (${((dlSize * 100) / totalBytes).toFixed()}%/100%)`)
-	})
+	// dl.OnData(data => {
+	// 	dlSize += data
+	// 	procressPanel.text(`Downloading Update (${formatBytes(dlSize)}/${totalSize}) (${((dlSize * 100) / totalBytes).toFixed()}%/100%)`)
+	// })
 
-	dl.Start()
+	// dl.Start()
 }
 
 function UpdateNotes() {
