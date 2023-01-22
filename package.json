@@ -1,0 +1,97 @@
+{
+	"name": "x-comic-downloader",
+	"version": "2.3.3",
+	"description": "A Software for Downloading Adult and Hentai Comic and Manga and Manage Theme.",
+	"main": "index.js",
+	"author": "Mehdi Enayatzadeh (LowMaster)",
+	"license": "MIT",
+	"private": true,
+	"keywords": [
+		"software",
+		"program",
+		"nsfw",
+		"downloader",
+		"comic",
+		"manga",
+		"hentai",
+		"adult"
+	],
+	"build": {
+		"appId": "com.x-comic-downloader.id",
+		"productName": "X Comic Downloader",
+		"copyright": "Copyright © 2021 Mehdi Enayatzadeh (LowMaster)",
+		"compression": "maximum",
+		"directories": {
+			"output": "build"
+		},
+		"mac": {
+			"category": "public.app-category.adult",
+			"target": [
+				"dmg"
+			],
+			"icon": "Image/favicon.icns"
+		},
+		"dmg": {
+			"icon": "Image/favicon.icns",
+			"iconSize": 100,
+			"window": {
+				"width": 544,
+				"height": 408
+			},
+			"contents": [
+				{
+					"x": 110,
+					"y": 150
+				},
+				{
+					"x": 240,
+					"y": 150,
+					"type": "link",
+					"path": "/Applications"
+				}
+			]
+		},
+		"linux": {
+			"target": "deb",
+			"icon": "Image/favicon-32x32.png"
+		},
+		"win": {
+			"target": "NSIS",
+			"publisherName": "Mehdi Enayatzadeh (LowMaster)",
+			"icon": "Image/favicon.ico"
+		},
+		"asar": false,
+		"nsis": {
+			"allowToChangeInstallationDirectory": true,
+			"oneClick": false
+		},
+		"deb": {}
+	},
+	"scripts": {
+		"start": "electron .",
+		"build": "electron-builder --dir",
+		"dist": "electron-builder",
+		"dist-mac": "electron-builder --mac",
+		"dist-linux": "electron-builder --linux"
+	},
+	"devDependencies": {
+		"electron": "^13.1.4",
+		"electron-builder": "22.7.0"
+	},
+	"dependencies": {
+		"jsonfile": "^6.1.0",
+		"jszip": "^3.7.1",
+		"nedb": "^1.8.0",
+		"node-fetch": "2",
+		"node-stream-zip": "^1.14.0",
+		"request": "^2.88.2",
+		"sharp": "^0.30.3"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/RealLowMaster/X-Comic-Downloader-Project.git"
+	},
+	"bugs": {
+		"url": "https://github.com/RealLowMaster/X-Comic-Downloader-Project/issues"
+	}
+}

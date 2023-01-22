@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Links -->
+	<link rel="stylesheet" type="text/css" href="CSS/main.css">
+	<link rel="stylesheet" type="text/css" href="CSS/browser.css">
+	<link rel="stylesheet" type="text/css" href="CSS/slider.css">
+	<link rel="stylesheet" type="text/css" href="CSS/collections.css">
+	<link rel="stylesheet" type="text/css" href="CSS/action.css">
+	<link rel="stylesheet" type="text/css" href="CSS/public.css">
+	<!-- Sites -->
+	<link rel="stylesheet" type="text/css" href="CSS/xlecx.css">
+	<link rel="stylesheet" type="text/css" href="CSS/nhentai.css">
+	<link rel="stylesheet" type="text/css" href="CSS/myhentaigallery.css">
+
+	<!-- Scripts -->
+	<script type="text/javascript">
+		if (typeof module === 'object') { window.module = module; module = undefined; }
+	</script>
+	<script type="text/javascript" src="JS/actions.js"></script>
+	<script type="text/javascript" src="JS/apis/xlecx-api.js"></script>
+	<script type="text/javascript" src="JS/apis/multporn-api.js"></script>
+	<script type="text/javascript" src="JS/defualt-classes.js"></script>
+	<script type="text/javascript" src="JS/classes.js"></script>
+	<script type="text/javascript" src="JS/main.js" defer></script>
+	<script type="text/javascript" src="JS/comics.js" defer></script>
+	<script type="text/javascript" src="JS/browser.js" defer></script>
+	<script type="text/javascript" src="JS/database.js" defer></script>
+	<script type="text/javascript" src="JS/collections.js" defer></script>
+	<script type="text/javascript" src="JS/make-thumb.js" defer></script>
+	<script type="text/javascript" src="JS/image-optimizer.js" defer></script>
+	<script type="text/javascript" src="JS/infos.js" defer></script>
+	<script type="text/javascript" src="JS/themes.js" defer></script>
+	<script type="text/javascript" src="JS/setting.js" defer></script>
+	<script type="text/javascript" src="JS/startup.js" defer></script>
+	<!-- Sites -->
+	<script type="text/javascript" src="JS/sites/xlecx.js" defer></script>
+	<script type="text/javascript" src="JS/sites/multporn.js" defer></script>
+</head>
+<body>
+	<div id="window">
+		<div id="window-menu">
+			<div>X Comic Downloader v2.3.3</div>
+			<div>
+				<button type="button" onclick="remote.app.quit()"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg></button>
+				<button type="button" onclick="maximizeApp()"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm0 394c0 3.3-2.7 6-6 6H54c-3.3 0-6-2.7-6-6V192h416v234z"></path></svg></button>
+				<button type="button" onclick="minimizeApp()"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 352H48c-26.5 0-48 21.5-48 48v32c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-32c0-26.5-21.5-48-48-48z"></path></svg></button>
+			</div>
+		</div>
+		<div id="main">
+			<!-- Top Menu -->
+			<div>
+				<div class="top-menu" id="top-menu">
+					<div>
+						<button onclick="PageManager.Home()" title="Back to Home Page | Ctrl+H">Home</button>
+						<button onclick="openBrowser()" title="Open Browser | Ctrl+B">Browser</button>
+						<div class="menu-dropdown">
+							<p>Optimzation</p>
+							<div>
+								<button onclick="makeThumb(false)" title="Create Thumbs For All Comics That Missied They Thumb">Make Thumb</button>
+								<button onclick="makeThumb(true)" title="ReCreate Comic Thumbs if They had, if don't Create New One">ReMake Thumbs</button>
+								<button onclick="startOptimizingAll()" title="Optimize All Non-Optimized Comics">Optimize Comics</button>
+							</div>
+						</div>
+						<div class="menu-dropdown">
+							<p>Manage</p>
+							<div>
+								<button onclick="openCollectionsPanel()" title="Open Collection Panel | Ctrl+X">Collections</button>
+								<div class="menu-dropdown">
+									<p>Infos</p>
+									<div>
+										<button onclick="openInfoPanel(0)" title="Groups | 1">Groups</button>
+										<button onclick="openInfoPanel(1)" title="Artists | 2">Artists</button>
+										<button onclick="openInfoPanel(2)" title="Parodies | 3">Parodies</button>
+										<button onclick="openInfoPanel(3)" title="Tags | 4">Tags</button>
+										<button onclick="openInfoPanel(4)" title="Characters | 5">Characters</button>
+										<button onclick="openInfoPanel(5)" title="Languages | 6">Languages</button>
+										<button onclick="openInfoPanel(6)" title="Categories | 7">Categories</button>
+									</div>
+								</div>
+								<button type="button" onclick="Downloader.OpenPanel()" title="Open Downloads">Downloads</button>
+								<button type="button" onclick="RepairAllComicInfos()" title="Repair All Comics Infos">Repair All</button>
+								<button type="button" onclick="OpenReleaseNotes()" title="Release Notes">Release Notes</button>
+							</div>
+						</div>
+						<button onclick="openSetting()">Setting</button>
+					</div>
+					<div>
+						<form class="browser-tool-search-form" id="offline-search-form" style="display:none">
+							<input type="text" placeholder="Search..." id="offline-search-form-input" style="border-radius: 7px;" onfocus="KeyManager.ChangeCategory(null)" onfocusout="KeyManager.ChangeCategory('defualt')" oninput="PageManager.Search(this.value)">
+						</form>
+					</div>
+					<div>
+						<div class="jump-page" id="jump-page-container">
+							<input type="number" id="jp-i"  onfocus="KeyManager.ChangeCategory(null)" onfocusout="KeyManager.ChangeCategory('defualt')" oninput> / <span id="jp-m-p"></span>
+							<button type="button" onclick="PageManager.RandomJumpPage()" title="Random | Ctrl+Z"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="redo-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256.455 8c66.269.119 126.437 26.233 170.859 68.685l35.715-35.715C478.149 25.851 504 36.559 504 57.941V192c0 13.255-10.745 24-24 24H345.941c-21.382 0-32.09-25.851-16.971-40.971l41.75-41.75c-30.864-28.899-70.801-44.907-113.23-45.273-92.398-.798-170.283 73.977-169.484 169.442C88.764 348.009 162.184 424 256 424c41.127 0 79.997-14.678 110.629-41.556 4.743-4.161 11.906-3.908 16.368.553l39.662 39.662c4.872 4.872 4.631 12.815-.482 17.433C378.202 479.813 319.926 504 256 504 119.034 504 8.001 392.967 8 256.002 7.999 119.193 119.646 7.755 256.455 8z"></path></svg></button>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<!-- Body -->
+			<div id="main-body">
+				<div id="off-sorter-toggle" style="display:none" onclick="PageManager.ToggleOffSorter()"><svg  aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></div>
+				<p id="off-page-title"></p>
+				<div id="off-page-sort">
+					<div onclick="PageManager.Sort(0)" title="Sort Newest To Oldest" active><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M330.17 258.91a79 79 0 0 0-55 54.17c-14.27 51.05 21.19 97.77 68.83 102.53a84.07 84.07 0 0 1-20.85 12.91c-7.57 3.4-10.8 12.47-8.18 20.34l9.9 20c2.87 8.63 12.53 13.49 20.9 9.91 58-24.76 86.25-61.61 86.25-132V336c-.02-51.21-48.4-91.34-101.85-77.09zM352 356a20 20 0 1 1 20-20 20 20 0 0 1-20 20zM304 96h16v64h-16a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h96a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16h-16V48a16 16 0 0 0-16-16h-48a16 16 0 0 0-14.29 8.83l-16 32A16 16 0 0 0 304 96zM107.31 36.69a16 16 0 0 0-22.62 0l-80 96C-5.35 142.74 1.78 160 16 160h48v304a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16V160h48c14.21 0 21.38-17.24 11.31-27.31z"></path></svg></div>
+					<div onclick="PageManager.Sort(1)" title="Sort Oldest To Newest"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M304 96h16v64h-16a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h96a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16h-16V48a16 16 0 0 0-16-16h-48a16 16 0 0 0-14.29 8.83l-16 32A16 16 0 0 0 304 96zm26.15 162.91a79 79 0 0 0-55 54.17c-14.25 51.05 21.21 97.77 68.85 102.53a84.07 84.07 0 0 1-20.85 12.91c-7.57 3.4-10.8 12.47-8.18 20.34l9.9 20c2.87 8.63 12.53 13.49 20.9 9.91 58-24.76 86.25-61.61 86.25-132V336c-.02-51.21-48.4-91.34-101.85-77.09zM352 356a20 20 0 1 1 20-20 20 20 0 0 1-20 20zm-176-4h-48V48a16 16 0 0 0-16-16H80a16 16 0 0 0-16 16v304H16c-14.19 0-21.36 17.24-11.29 27.31l80 96a16 16 0 0 0 22.62 0l80-96C197.35 369.26 190.22 352 176 352z"></path></svg></div>
+					<div onclick="PageManager.Sort(2)" title="Sort Z To A"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M176 352h-48V48a16 16 0 0 0-16-16H80a16 16 0 0 0-16 16v304H16c-14.19 0-21.36 17.24-11.29 27.31l80 96a16 16 0 0 0 22.62 0l80-96C197.35 369.26 190.22 352 176 352zm112-128h128a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16h-56l61.26-70.45A32 32 0 0 0 432 65.63V48a16 16 0 0 0-16-16H288a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h56l-61.26 70.45A32 32 0 0 0 272 190.37V208a16 16 0 0 0 16 16zm159.06 234.62l-59.27-160A16 16 0 0 0 372.72 288h-41.44a16 16 0 0 0-15.07 10.62l-59.27 160A16 16 0 0 0 272 480h24.83a16 16 0 0 0 15.23-11.08l4.42-12.92h71l4.41 12.92A16 16 0 0 0 407.16 480H432a16 16 0 0 0 15.06-21.38zM335.61 400L352 352l16.39 48z"></path></svg></div>
+					<div onclick="PageManager.Sort(3)" title="Sort A To Z"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M16 160h48v304a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16V160h48c14.21 0 21.38-17.24 11.31-27.31l-80-96a16 16 0 0 0-22.62 0l-80 96C-5.35 142.74 1.78 160 16 160zm272 64h128a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16h-56l61.26-70.45A32 32 0 0 0 432 65.63V48a16 16 0 0 0-16-16H288a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h56l-61.26 70.45A32 32 0 0 0 272 190.37V208a16 16 0 0 0 16 16zm159.06 234.62l-59.27-160A16 16 0 0 0 372.72 288h-41.44a16 16 0 0 0-15.07 10.62l-59.27 160A16 16 0 0 0 272 480h24.83a16 16 0 0 0 15.23-11.08l4.42-12.92h71l4.41 12.92A16 16 0 0 0 407.16 480H432a16 16 0 0 0 15.06-21.38zM335.61 400L352 352l16.39 48z"></path></svg></div>
+				</div>
+				<div id="off-sorter" style="display:none">
+					<div>
+						Groups:
+						<div id="os-g"></div>
+						<div onclick="PageManager.addInfo = true;openInfoPanel(0)">+</div>
+					</div>
+					<div>
+						Artists:
+						<div id="os-a"></div>
+						<div onclick="PageManager.addInfo = true;openInfoPanel(1)">+</div>
+					</div>
+					<div>
+						Parodies:
+						<div id="os-p"></div>
+						<div onclick="PageManager.addInfo = true;openInfoPanel(2)">+</div>
+					</div>
+					<div>
+						Tags:
+						<div id="os-t"></div>
+						<div onclick="PageManager.addInfo = true;openInfoPanel(3)">+</div>
+					</div>
+					<div>
+						Characters:
+						<div id="os-c"></div>
+						<div onclick="PageManager.addInfo = true;openInfoPanel(4)">+</div>
+					</div>
+					<div>
+						Languages:
+						<div id="os-l"></div>
+						<div onclick="PageManager.addInfo = true;openInfoPanel(5)">+</div>
+					</div>
+					<div>
+						Categories:
+						<div id="os-ca"></div>
+						<div onclick="PageManager.addInfo = true;openInfoPanel(6)">+</div>
+					</div>
+				</div>
+				<div id="comic-container" page=""></div>
+				<div id="pagination"></div>
+				<p id="comics-counter"></p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Theme Manager -->
+	<div id="theme-manager">
+		<div>
+			<select id="theme-index-selector" oninput="ThemeIndexSelector(Number(this.value))"></select>
+			<button class="btn btn-primary" type="button" title="Add New Theme" onclick="AddNewTheme()">Add Theme</button>
+			<button class="btn btn-danger" type="button" title="Close Theme Manager Without Saving" onclick="CloseThemeManager()" style="margin-left: 100px;">Close Manager</button>
+			<button class="btn btn-success" type="button" title="Save Theme And Reload App" onclick="SaveThemeManager()">Save</button>
+		</div>
+
+		<div id="theme-adder">
+			<div id="theme-container"></div>
+			<button id="theme-add-btn" type="button" onclick="AddThemeAttribute()" title="Add Attrbiute">+</button>
+		</div>
+
+		<div id="theme-rename">
+			<div onclick="isAddingThemeAttr=null;this.parentElement.style.display = 'none'"></div>
+			<div>
+				<input type="text" placeholder="Attribute Name..." id="theme-attribute-input">
+				<button type="button" class="btn btn-primary" onclick="RenameThemeAttribute()">Save</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Info Panel -->
+	<div id="info-panel">
+		<div id="i-p-c-btn" title="Close | Esc" onclick="closeInfoPanel()"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><g><path fill="currentColor" d="M9.21,356.07a31.46,31.46,0,0,0,0,44.48l22.24,22.24a31.46,31.46,0,0,0,44.48,0L176,322.72,109.28,256ZM342.79,111.45,320.55,89.21a31.46,31.46,0,0,0-44.48,0L176,189.28,242.72,256,342.79,155.93a31.46,31.46,0,0,0,0-44.48Z" style="opacity:.6"></path><path fill="currentColor" d="M342.79,356.07a31.46,31.46,0,0,1,0,44.48l-22.24,22.24a31.46,31.46,0,0,1-44.48,0L9.21,155.93a31.46,31.46,0,0,1,0-44.48L31.45,89.21a31.46,31.46,0,0,1,44.48,0Z"></path></g></svg></div>
+
+		<p id="i-p-t"></p>
+
+		<input id="i-p-s-i" type="text" placeholder="Search..." oninput="InfoSearch(this.value)">
+
+		<div id="i-p-i-c"></div>
+	</div>
+
+	<!-- Collections -->
+	<div id="collections-panel">
+		<div id="c-p-t-m">
+			<button type="button" class="btn btn-danger" onclick="closeCollectionsPanel()">Close</button>
+			<button type="button" class="btn btn-primary" onclick="openAddCollection()">Add Collection</button>
+		</div>
+		<input id="c-p-s" type="text" placeholder="Search.." oninput="collectionSearch(this.value)">
+		<div id="c-p-c-c"></div>
+		<div id="c-p-a-c-p">
+			<div onclick="closeAddCollection()"></div>
+			<div>
+				<input class="form-text" id="c-p-a-c-p-n" type="text" placeholder="Collection Name...">
+				<button type="button" class="btn btn-danger" onclick="closeAddCollection()">Cancel</button>
+				<button type="button" class="btn btn-success" onclick="addCollection()">Save</button>
+			</div>
+		</div>
+		<div id="c-p-a-c-r-p">
+			<div onclick="document.getElementById('c-p-a-c-r-p').style.display = 'none'"></div>
+			<div>
+				<input class="form-text" id="c-p-a-c-r-p-n" type="text" placeholder="Collection Name...">
+				<button type="button" class="btn btn-danger" onclick="document.getElementById('c-p-a-c-r-p').style.display = 'none'">Cancel</button>
+				<button type="button" class="btn btn-success" onclick="renameCollection()">Save</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Collection RightClick Menu -->
+	<div id="c-r-c-m" class="right-cmenu">
+		<button type="button" onclick="openCollectionRename()" title="Rename Collection"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><g><path fill="currentColor" d="M304 416a16 16 0 0 1 16 16v32a16 16 0 0 1-16 16H144a16 16 0 0 1-16-16v-32a16 16 0 0 1 16-16z" style="opacity:.4"></path><path fill="currentColor" d="M448 48v96a16 16 0 0 1-16 16h-32a16 16 0 0 1-16-16v-32H264v304h-80V112H64v32a16 16 0 0 1-16 16H16a16 16 0 0 1-16-16V48a16 16 0 0 1 16-16h416a16 16 0 0 1 16 16z"></path></g></svg> Rename</button>
+		
+		<button type="button" onclick="askForResetingCollectionThumb(collection_menu_index)" title="Reseting Collection Thumb"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path fill="currentColor" d="M448 384H64v-48l71.51-71.52a12 12 0 0 1 17 0L208 320l135.51-135.52a12 12 0 0 1 17 0L448 272z" style="opacity:.4"></path><path fill="currentColor" d="M464 64H48a48 48 0 0 0-48 48v288a48 48 0 0 0 48 48h416a48 48 0 0 0 48-48V112a48 48 0 0 0-48-48zm-352 56a56 56 0 1 1-56 56 56 56 0 0 1 56-56zm336 264H64v-48l71.51-71.52a12 12 0 0 1 17 0L208 320l135.51-135.52a12 12 0 0 1 17 0L448 272z"></path></g></svg> Reset Thumb</button>
+		
+		<button type="button" onclick="askForRemovingCollection(collection_menu_index)" danger-btn title="Delete Collection"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><g><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V96H32zm272-288a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0z" style="opacity:.4"></path><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM128 160a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16zm96 0a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16zm96 0a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16z"></path></g></svg> Delete</button>
+	</div>
+
+	<!-- Offline Comic RightClick Menu -->
+	<div id="c-c-r-c-p" class="right-cmenu">
+		<button type="button" onclick="openRenameComic(comic_menu_id)"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><g><path fill="currentColor" d="M304 416a16 16 0 0 1 16 16v32a16 16 0 0 1-16 16H144a16 16 0 0 1-16-16v-32a16 16 0 0 1 16-16z" style="opacity:.4"></path><path fill="currentColor" d="M448 48v96a16 16 0 0 1-16 16h-32a16 16 0 0 1-16-16v-32H264v304h-80V112H64v32a16 16 0 0 1-16 16H16a16 16 0 0 1-16-16V48a16 16 0 0 1 16-16h416a16 16 0 0 1 16 16z"></path></g></svg> Rename</button>
+
+		<button type="button" thumb-btn onclick="makeThumbForAComic(comic_menu_id, 0)" thumb-btn title="Make Thumb">Make Thumb</button>
+
+		<button type="button" onclick="OptimizeComicImages(comic_menu_id, false, 0)" title="Optimize Comic Images"> Optimize</button>
+		
+		<button type="button" onclick="openComicExportPanel(comic_menu_id)" title="Export Comic"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><g><path fill="currentColor" d="M384 352.05v136.07A23.94 23.94 0 0 1 360 512H23.88A23.94 23.94 0 0 1 0 488V23.88A23.94 23.94 0 0 1 24 0h232v112a16 16 0 0 0 16 16h112v160.05H208a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16z" style="opacity:.4"></path><path fill="currentColor" d="M272 128h112v-6.1a23.9 23.9 0 0 0-7-16.9L279.1 7a24 24 0 0 0-17-7H256v112a16 16 0 0 0 16 16zm299 180.05l-95.61-96.5c-10.1-10.1-27.41-3-27.41 11.3v65.2H208a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h239.93v65.1c0 14.3 17.31 21.4 27.41 11.3l95.71-96.4a17 17 0 0 0-.05-24z"></path></g></svg> Export</button>
+
+		<button type="button" onclick="openAddComicToCollection(comic_menu_id)" title="Add Comic To Collection"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path fill="currentColor" d="M12.41 236.31L70.51 210l161.63 73.27a57.64 57.64 0 0 0 47.72 0L441.5 210l58.09 26.33c16.55 7.5 16.55 32.5 0 40L266.64 381.9a25.68 25.68 0 0 1-21.29 0L12.41 276.31c-16.55-7.5-16.55-32.5 0-40z" style="opacity:.4"></path><path fill="currentColor" d="M12.41 148l232.94 105.7a25.61 25.61 0 0 0 21.29 0L499.58 148c16.55-7.51 16.55-32.52 0-40L266.65 2.32a25.61 25.61 0 0 0-21.29 0L12.41 108c-16.55 7.5-16.55 32.52 0 40zm487.18 216.11l-57.87-26.23-161.86 73.37a57.64 57.64 0 0 1-47.72 0L70.29 337.88l-57.88 26.23c-16.55 7.5-16.55 32.5 0 40L245.35 509.7a25.68 25.68 0 0 0 21.29 0l233-105.59c16.5-7.5 16.5-32.5-.05-40z"></path></g></svg> Collections</button>
+		
+		<button type="button" onclick="askForDeletingComic(comic_menu_id)" danger-btn title="Delete Comic"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><g><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V96H32zm272-288a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0z" style="opacity:.4"></path><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM128 160a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16zm96 0a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16zm96 0a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16z"></path></g></svg> Delete</button>
+
+		<button type="button" onclick="OpenComicProperties(comic_menu_id)"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><g><path fill="currentColor" d="M20 448h152a20 20 0 0 1 20 20v24a20 20 0 0 1-20 20H20a20 20 0 0 1-20-20v-24a20 20 0 0 1 20-20z" style="opacity:.4"></path><path fill="currentColor" d="M96 128a64 64 0 1 0-64-64 64 64 0 0 0 64 64zm28 64H20a20 20 0 0 0-20 20v24a20 20 0 0 0 20 20h28v192h96V212a20 20 0 0 0-20-20z"></path></g></svg> Properties</button>
+	</div>
+
+	<!-- Comic Panel -->
+	<div id="comic-panel" cid="null">
+		<button class="comic-panel-repair-info-btn" title="Options | Ctrl+Q" onclick="document.getElementById('comic-action-panel').style.display='flex';KeyManager.ChangeCategory(null)"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path fill="currentColor" d="M193.8 227.7L18.74 402.76a64 64 0 0 0 90.5 90.5l148.88-148.88a75.36 75.36 0 0 1 6.58-45.78zM64 472a24 24 0 1 1 24-24 24 24 0 0 1-24 24zm443.73-362.9a12 12 0 0 0-20.12-5.51L413.25 178l-67.88-11.31-11.31-67.93 74.36-74.36a12 12 0 0 0-5.66-20.16 143.92 143.92 0 0 0-136.58 37.93c-39.64 39.64-50.55 97.1-34.05 147.2l-4.43 4.43 70.9 70.9a74.25 74.25 0 0 1 85.4 13.9l7.21 7.21a141.74 141.74 0 0 0 78.61-40 143.94 143.94 0 0 0 37.91-136.71z" style="opacity:.6"></path><path fill="currentColor" d="M501.1 395.7a37.36 37.36 0 0 1 0 52.7l-52.7 52.7a37.18 37.18 0 0 1-52.58.12l-.12-.12L278.6 384c-23.1-23.1-27.5-57.6-13.9-85.4L158.1 192H96L0 64 64 0l128 96v62.1l106.6 106.6a74.25 74.25 0 0 1 85.4 13.9z"></path></g></svg></button>
+
+		<button class="comic-panel-slider-btn" title="Slider | Ctrl+S" onclick="SliderManager.Open()"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><g><path fill="currentColor" d="M480 64h64v256a32 32 0 0 1-32 32H64a32 32 0 0 1-32-32V64h64v224h384z" style="opacity:.6"></path><path fill="currentColor" d="M560 0H16A16 16 0 0 0 0 16v32a16 16 0 0 0 16 16h544a16 16 0 0 0 16-16V16a16 16 0 0 0-16-16zM320 386.75V352h-64v34.75l-75.31 75.31a16 16 0 0 0 0 22.63l22.62 22.62a16 16 0 0 0 22.63 0L288 445.25l62.06 62.06a16 16 0 0 0 22.63 0l22.62-22.62a16 16 0 0 0 0-22.63z"></path></g></svg></button>
+
+		<button style="display: none;" id="c-p-r-btn" onclick="KeyManager.ChangeCategory(null); repairComicImages()" title="Repair Images, Some Images are not Downloaded | Ctrl+r"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><g><path fill="currentColor" d="M569.52 440L329.58 24c-18.44-32-64.69-32-83.16 0L6.48 440c-18.42 31.94 4.64 72 41.57 72h479.89c36.87 0 60.06-40 41.58-72zM288 448a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm38.24-238.41l-12.8 128A16 16 0 0 1 297.52 352h-19a16 16 0 0 1-15.92-14.41l-12.8-128A16 16 0 0 1 265.68 192h44.64a16 16 0 0 1 15.92 17.59z" style="opacity:.5"></path><path fill="currentColor" d="M310.32 192h-44.64a16 16 0 0 0-15.92 17.59l12.8 128A16 16 0 0 0 278.48 352h19a16 16 0 0 0 15.92-14.41l12.8-128A16 16 0 0 0 310.32 192zM288 384a32 32 0 1 0 32 32 32 32 0 0 0-32-32z"></path></g></svg></button>
+
+		<button class="comic-panel-close-btn" title="Close | Esc" onclick="closeComicPanel()"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><g><path fill="currentColor" d="M9.21,356.07a31.46,31.46,0,0,0,0,44.48l22.24,22.24a31.46,31.46,0,0,0,44.48,0L176,322.72,109.28,256ZM342.79,111.45,320.55,89.21a31.46,31.46,0,0,0-44.48,0L176,189.28,242.72,256,342.79,155.93a31.46,31.46,0,0,0,0-44.48Z" style="opacity:.6"></path><path fill="currentColor" d="M342.79,356.07a31.46,31.46,0,0,1,0,44.48l-22.24,22.24a31.46,31.46,0,0,1-44.48,0L9.21,155.93a31.46,31.46,0,0,1,0-44.48L31.45,89.21a31.46,31.46,0,0,1,44.48,0Z"></path></g></svg></button>
+
+		<p id="c-p-t"></p>
+
+		<div class="comic-panel-tags" id="c-p-g"></div>
+		<div class="comic-panel-tags" id="c-p-a"></div>
+		<div class="comic-panel-tags" id="c-p-p"></div>
+		<div class="comic-panel-tags" id="c-p-c"></div>
+		<div class="comic-panel-tags" id="c-p-l"></div>
+		<div class="comic-panel-tags" id="c-p-ct"></div>
+		<div class="comic-panel-tags" id="c-p-ts"></div>
+
+		<div id="c-p-i-s">
+			<select class="form-select" oninput="document.getElementById('c-p-i').setAttribute('r', this.value)">
+				<option value="1" selected>1 in Row</option>
+				<option value="2">2 in Row</option>
+				<option value="3">3 in Row</option>
+				<option value="4">4 in Row</option>
+				<option value="5">5 in Row</option>
+				<option value="6">6 in Row</option>
+			</select>
+		</div>
+		<div id="c-p-i" r="1"></div>
+
+		<div id="c-p-i-r-p" class="right-cmenu">
+			<button type="button" onclick="SetComicThumb(comic_panel_menu_info[0], comic_panel_menu_info[1])" title="Set this Image as Comic Thumb"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><g><path fill="currentColor" d="M384 328a24 24 0 0 1-24 24H224V208a16 16 0 0 0-16-16h-32a16 16 0 0 0-16 16v144H24a24 24 0 0 1-24-24c0-50.74 37.47-91.18 86-113.73L98.21 96H56a24 24 0 0 1-24-24V24A24 24 0 0 1 56 0h272a24 24 0 0 1 24 24v48a24 24 0 0 1-24 24h-42.21L298 214.27c48 22.31 86 62.55 86 113.73z" style="opacity:.4"></path><path fill="currentColor" d="M224 208v248a8 8 0 0 1-.84 3.57l-24 48a8 8 0 0 1-14.32 0l-24-48A8 8 0 0 1 160 456V208a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16z"></path></g></svg> Set Thumb</button>
+
+			<button type="button" onclick="askForDeletingComicImage(comic_panel_menu_info[0], comic_panel_menu_info[1])" title="Remove This Image From Comic" danger-btn><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><g><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V96H32zm272-288a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0z" style="opacity:.4"></path><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM128 160a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16zm96 0a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16zm96 0a16 16 0 0 0-16 16v224a16 16 0 0 0 32 0V176a16 16 0 0 0-16-16z"></path></g></svg> Delete Image</button>
+		</div>
+	</div>
+
+	<!-- Comic Action Panel -->
+	<div id="comic-action-panel">
+		<div onclick="this.parentElement.style.display='none';KeyManager.ChangeCategory('comic')"></div>
+		<div>
+			<div>
+				<button type="button" onclick="repairComicInfo(0)" title="Repair Comic Title">Repair Comic Name</button>
+				<button type="button" onclick="repairComicInfo(1)" title="Repair Comic Groups if Have">Repair Comic Groups</button>
+				<button type="button" onclick="repairComicInfo(2)" title="Repair Comic Artists if Have">Repair Comic Artists</button>
+				<button type="button" onclick="repairComicInfo(3)" title="Repair Comic Parodies if Have">Repair Comic Parodies</button>
+				<button type="button" onclick="repairComicInfo(4)" title="Repair Comic Tags if Have">Repair Comic Tags</button>
+				<button type="button" onclick="repairComicInfo(6)" title="Repair Comic Characters if Have">Repair Comic Characters</button>
+				<button type="button" onclick="repairComicInfo(7)" title="Repair Comic Languages if Have">Repair Comic Languages</button>
+				<button type="button" onclick="repairComicInfo(8)" title="Repair Comic Categories if Have">Repair Comic Categories</button>
+			</div>
+			<div>
+				<button type="button" onclick="openRenameComic(Number(comicPanel.getAttribute('cid')))" title="Rename Comic">Rename Comic</button>
+				<button type="button" onclick="makeThumbForAComic(Number(comicPanel.getAttribute('cid')), null)" class="success-action" id="c-a-p-o-t" title="Make Thumb for faster loading in Overview">Make Thumb</button>
+				<button type="button" onclick="OptimizeComicImages(Number(comicPanel.getAttribute('cid')), true, 1)" class="success-action" id="c-a-p-o-b" title="Optimize Image For faster loading and Lower Space taken (May Take Time)">Optimize Images</button>
+				<button type="button" onclick="openComicExportPanel(Number(comicPanel.getAttribute('cid')))" title="Export Comic | Ctrl+E">Export</button>
+				<button type="button" onclick="openAddComicToCollection(Number(comicPanel.getAttribute('cid')))" title="Add Comic To Collection">Collections</button>
+				<button type="button" onclick="askForDeletingComic(Number(comicPanel.getAttribute('cid')))" class="danger-action" title="Fully Delete Comic">Delete Image</button>
+				<button type="button" onclick="OpenComicProperties(Number(comicPanel.getAttribute('cid')))" title="Open Comic Properties">Properties</button>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Comic Collection Panel -->
+	<div id="comic-collection-panel">
+		<div onclick="closeAddComicToCollection()"></div>
+		<div>
+			<input id="c-c-p-s-i" type="text" placeholder="Search..." oninput="onComicCollectionPanelSearch(this.value)">
+			<div id="c-c-p-c-c"></div>
+		</div>
+	</div>
+
+	<!-- Comic Properties -->
+	<div id="comic-properties">
+		<div onclick="CloseComicProperties()"></div>
+		<div id="c-p-c">
+			<div class="c-p-text"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z"></path></svg>Name: <span id="c-p-c-n">Monkeying Around</span></div>
+
+			<div class="c-p-text"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M384 121.941V128H256V0h6.059a24 24 0 0 1 16.97 7.029l97.941 97.941a24.002 24.002 0 0 1 7.03 16.971zM248 160c-13.2 0-24-10.8-24-24V0H24C10.745 0 0 10.745 0 24v464c0 13.255 10.745 24 24 24h336c13.255 0 24-10.745 24-24V160H248zm-135.455 16c26.51 0 48 21.49 48 48s-21.49 48-48 48-48-21.49-48-48 21.491-48 48-48zm208 240h-256l.485-48.485L104.545 328c4.686-4.686 11.799-4.201 16.485.485L160.545 368 264.06 264.485c4.686-4.686 12.284-4.686 16.971 0L320.545 304v112z"></path></svg>Images: <span id="c-p-c-i-c"></span></div>
+			<div class="c-p-text"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 128H272l-64-64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V176c0-26.51-21.49-48-48-48z"></path></svg> Size: <span id="c-p-c-s"></span></div>
+			<div class="c-p-text"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M320 0H128L0 128v320c0 35.3 28.7 64 64 64h256c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64zM160 160h-48V64h48v96zm80 0h-48V64h48v96zm80 0h-48V64h48v96z"></path></svg>IsOptimized: <span id="c-p-c-i-o"></span></div>
+			<div class="c-p-text"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M572.694 292.093L500.27 416.248A63.997 63.997 0 0 1 444.989 448H45.025c-18.523 0-30.064-20.093-20.731-36.093l72.424-124.155A64 64 0 0 1 152 256h399.964c18.523 0 30.064 20.093 20.73 36.093zM152 224h328v-48c0-26.51-21.49-48-48-48H272l-64-64H48C21.49 64 0 85.49 0 112v278.046l69.077-118.418C86.214 242.25 117.989 224 152 224z"></path></svg>Folder: <span id="c-p-c-o-f" style="cursor:pointer">Open Folder</span></div>
+		</div>
+	</div>
+
+	<!-- Slider -->
+	<div id="comic-slider">
+		<div id="c-s-ov">
+			<div id="c-s-o" aindex count></div>
+			<button type="button" onclick="SliderManager.ToggleOverview()">Gallery</button>
+		</div>
+		<div id="c-s-ct">
+			<div id="c-s-bg" onclick="SliderManager.Close()"></div>
+			<div id="c-s-c">
+				<img src id="c-s-i" onclick="SliderManager.ToggleSize()" draggable="false">
+			</div>
+			<div id="c-s-btns">
+				<button type="button" id="c-s-p" title="Previous | A | LeftArrow"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M229.9 473.899l19.799-19.799c4.686-4.686 4.686-12.284 0-16.971L94.569 282H436c6.627 0 12-5.373 12-12v-28c0-6.627-5.373-12-12-12H94.569l155.13-155.13c4.686-4.686 4.686-12.284 0-16.971L229.9 38.101c-4.686-4.686-12.284-4.686-16.971 0L3.515 247.515c-4.686 4.686-4.686 12.284 0 16.971L212.929 473.9c4.686 4.686 12.284 4.686 16.971-.001z"></path></svg></button>
+				<button type="button" id="c-s-n" title="Next | D | RightArrow"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M218.101 38.101L198.302 57.9c-4.686 4.686-4.686 12.284 0 16.971L353.432 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h341.432l-155.13 155.13c-4.686 4.686-4.686 12.284 0 16.971l19.799 19.799c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L235.071 38.101c-4.686-4.687-12.284-4.687-16.97 0z"></path></svg></button>
+				<button type="button" onclick="SliderManager.ToggleSize()" id="c-s-s" title="Orginal Size | O"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-expand fa-w-14 fa-2x"><path fill="currentColor" d="M0 180V56c0-13.3 10.7-24 24-24h124c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H64v84c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12zM288 44v40c0 6.6 5.4 12 12 12h84v84c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12V56c0-13.3-10.7-24-24-24H300c-6.6 0-12 5.4-12 12zm148 276h-40c-6.6 0-12 5.4-12 12v84h-84c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h124c13.3 0 24-10.7 24-24V332c0-6.6-5.4-12-12-12zM160 468v-40c0-6.6-5.4-12-12-12H64v-84c0-6.6-5.4-12-12-12H12c-6.6 0-12 5.4-12 12v124c0 13.3 10.7 24 24 24h124c6.6 0 12-5.4 12-12z"></path></svg></button>
+				<button type="button" onclick="ChangeScreenMode()" title="FullScreen | F11"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-expand-arrows-alt fa-w-14 fa-2x"><path fill="currentColor" d="M448 344v112a23.94 23.94 0 0 1-24 24H312c-21.39 0-32.09-25.9-17-41l36.2-36.2L224 295.6 116.77 402.9 153 439c15.09 15.1 4.39 41-17 41H24a23.94 23.94 0 0 1-24-24V344c0-21.4 25.89-32.1 41-17l36.19 36.2L184.46 256 77.18 148.7 41 185c-15.1 15.1-41 4.4-41-17V56a23.94 23.94 0 0 1 24-24h112c21.39 0 32.09 25.9 17 41l-36.2 36.2L224 216.4l107.23-107.3L295 73c-15.09-15.1-4.39-41 17-41h112a23.94 23.94 0 0 1 24 24v112c0 21.4-25.89 32.1-41 17l-36.19-36.2L263.54 256l107.28 107.3L407 327.1c15.1-15.2 41-4.5 41 16.9z"></path></svg></button>
+			</div>
+			<p id="c-s-pg"><span id="c-s-a-pg"></span>/<span id="c-s-m-pg"></span></p>
+		</div>
+	</div>
+
+	<!-- Rename Comic -->
+	<div id="comic-rename-panel">
+		<div onclick="closeRenamePanel()"></div>
+		<div>
+			<input type="text">
+			<button type="button" onclick="renameComic(Number(document.getElementById('comic-rename-panel').getAttribute('cid')), this.parentElement.children[0].value)" class="btn btn-danger">Rename</button>
+		</div>
+	</div>
+
+	<!-- Browser -->
+	<div class="browser" id="browser">
+		<!-- Right Click Menu -->
+		<div class="right-cmenu" id="br-crmenu">
+			<button type="button">Open</button>
+			<button type="button">Open In New Tab</button>
+			<button type="button" style="display:none">Add To Bookmark</button>
+			<button type="button" success-btn>Add To Have</button>
+			<button type="button" warning-btn>Remove From Have</button>
+			<button type="button">Download</button>
+		</div>
+
+		<div class="browser-tab-container" id="browser-tabs"></div>
+
+		<button class="borwser-add-tab-btn" onclick="openSite(active_site)" title="Create New Tab | Ctrl+N"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-plus fa-w-14 fa-2x"><g><path fill="currentColor" d="M176 448a32 32 0 0 0 32 32h32a32 32 0 0 0 32-32V304h-96zm64-416h-32a32 32 0 0 0-32 32v144h96V64a32 32 0 0 0-32-32z" style="opacity:.5"></path><path fill="currentColor" d="M448 240v32a32 32 0 0 1-32 32H32a32 32 0 0 1-32-32v-32a32 32 0 0 1 32-32h384a32 32 0 0 1 32 32z"></path></g></svg></button>
+
+		<div class="browser-tools-container" id="browser-tools">
+			<div>
+				<button id="browser-home-btn" onclick="browserTabHome()" title="Home | Ctrl+Q"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path></svg></button>
+
+				<button id="browser-prev-btn" onclick="browserPrev()" title="Previous | Ctrl+LeftArrow"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"></path></svg></button>
+
+				<button id="browser-next-btn" onclick="browserNext()" title="Next | Ctrl+RightArrow"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"></path></svg></button>
+
+				<button id="browser-reload-btn" onclick="browserTabReload()" title="Reload | Ctrl+R"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256.455 8c66.269.119 126.437 26.233 170.859 68.685l35.715-35.715C478.149 25.851 504 36.559 504 57.941V192c0 13.255-10.745 24-24 24H345.941c-21.382 0-32.09-25.851-16.971-40.971l41.75-41.75c-30.864-28.899-70.801-44.907-113.23-45.273-92.398-.798-170.283 73.977-169.484 169.442C88.764 348.009 162.184 424 256 424c41.127 0 79.997-14.678 110.629-41.556 4.743-4.161 11.906-3.908 16.368.553l39.662 39.662c4.872 4.872 4.631 12.815-.482 17.433C378.202 479.813 319.926 504 256 504 119.034 504 8.001 392.967 8 256.002 7.999 119.193 119.646 7.755 256.455 8z"></path></svg></button>
+
+				<button id="browser-recent-tabs-btn" onclick="openBrowserLastTabs()" title="Open Recent Tab | Ctrl+Shift+T"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M8.309 189.836L184.313 37.851C199.719 24.546 224 35.347 224 56.015v80.053c160.629 1.839 288 34.032 288 186.258 0 61.441-39.581 122.309-83.333 154.132-13.653 9.931-33.111-2.533-28.077-18.631 45.344-145.012-21.507-183.51-176.59-185.742V360c0 20.7-24.3 31.453-39.687 18.164l-176.004-152c-11.071-9.562-11.086-26.753 0-36.328z"></path></svg></button>
+
+				<button id="browser-open-histories" onclick="toggleBrowserHistory()" title="Open History Panel | Ctrl+H"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M504 255.531c.253 136.64-111.18 248.372-247.82 248.468-59.015.042-113.223-20.53-155.822-54.911-11.077-8.94-11.905-25.541-1.839-35.607l11.267-11.267c8.609-8.609 22.353-9.551 31.891-1.984C173.062 425.135 212.781 440 256 440c101.705 0 184-82.311 184-184 0-101.705-82.311-184-184-184-48.814 0-93.149 18.969-126.068 49.932l50.754 50.754c10.08 10.08 2.941 27.314-11.313 27.314H24c-8.837 0-16-7.163-16-16V38.627c0-14.254 17.234-21.393 27.314-11.314l49.372 49.372C129.209 34.136 189.552 8 256 8c136.81 0 247.747 110.78 248 247.531zm-180.912 78.784l9.823-12.63c8.138-10.463 6.253-25.542-4.21-33.679L288 256.349V152c0-13.255-10.745-24-24-24h-16c-13.255 0-24 10.745-24 24v135.651l65.409 50.874c10.463 8.137 25.541 6.253 33.679-4.21z"></path></svg></button>
+			</div>
+			<div>
+				<form class="browser-tool-search-form" id="browser-tool-search-form">
+					<input type="text" placeholder="Search..." oninput="tabs[activeTabIndex].s = this.value" id="browser-tool-search-input">
+					<button type="submit" id="b-t-s-i-btn"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg></button>
+				</form>
+			</div>
+			<div>
+				<div class="jump-page" id="browser-jump-page-container">
+					<input type="number" id="bjp-i" oninput> / <span id="bjp-m-p"></span>
+				</div>
+			</div>
+			<button id="browser-sites-btn" onclick="toggleSitePanel()" title="Toggle Browser Sites | Ctrl+S"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><g><path fill="currentColor" d="M104 320H56v-57.59A38.45 38.45 0 0 1 94.41 224H296v-64h48v64h201.59A38.46 38.46 0 0 1 584 262.41V320h-48v-48H344v48h-48v-48H104z" style="opacity:.5"></path><path fill="currentColor" d="M128 352H32a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32zM384 0H256a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h128a32 32 0 0 0 32-32V32a32 32 0 0 0-32-32zm224 352h-96a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32zm-240 0h-96a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32z"></path></g></svg></button>
+
+			<button id="browser-tool-close-browser" onclick="closeBrowser()" title="Exit Browser | Esc"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-sign-out fa-w-16 fa-2x"><g class="fa-group"><path fill="currentColor" d="M180 448H96a96 96 0 0 1-96-96V160a96 96 0 0 1 96-96h84a12 12 0 0 1 12 12v40a12 12 0 0 1-12 12H96a32 32 0 0 0-32 32v192a32 32 0 0 0 32 32h84a12 12 0 0 1 12 12v40a12 12 0 0 1-12 12z" style="opacity:.5"></path><path fill="currentColor" d="M353 88.3l151.9 150.6a24 24 0 0 1 0 34.1l-152 150.8a24.08 24.08 0 0 1-33.9-.1l-21.9-21.9a24.07 24.07 0 0 1 .8-34.7l77.6-71.1H184a23.94 23.94 0 0 1-24-24v-32a23.94 23.94 0 0 1 24-24h191.5l-77.6-71.1a24 24 0 0 1-.7-34.6l21.9-21.9a24 24 0 0 1 33.9-.1z"></path></g></svg></button>
+		</div>
+		<div class="browser-pages-container" id="browser-pages"></div>
+
+		<div class="browser-menu" id="browser-tab-menu">
+			<button onclick="pasteTab([tabs[openedMenuTabIndex].s, tabs[openedMenuTabIndex].history, tabs[openedMenuTabIndex].activeHistory, tabs[openedMenuTabIndex].site])">Duplicate</button>
+			<button onclick="copiedTab = [tabs[openedMenuTabIndex].s, tabs[openedMenuTabIndex].history, tabs[openedMenuTabIndex].activeHistory, tabs[openedMenuTabIndex].site];PopAlert('Tab Copied.')">Copy</button>
+		</div>
+
+		<div class="browser-menu" id="browser-paste-menu">
+			<button onclick="pasteTab(copiedTab)">Paste</button>
+		</div>
+
+		<div id="browser-sites-panel">
+			<input type="text" id="b-s-p-s" placeholder="Search..." oninput="BrowserSearchSite(this.value)">
+		
+			<div id="b-s-p-c"></div>
+		</div>
+
+		<div id="browser-history-panel">
+			<div id="b-h-p-o-btn">
+				<button type="button"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><g><path fill="currentColor" d="M168 80a72 72 0 1 0-72 72 72 72 0 0 0 72-72zm-96 0a24 24 0 1 1 24 24 24 24 0 0 1-24-24zm96 352a72 72 0 1 0-72 72 72 72 0 0 0 72-72zm-96 0a24 24 0 1 1 24 24 24 24 0 0 1-24-24zm96-176a72 72 0 1 0-72 72 72 72 0 0 0 72-72zm-96 0a24 24 0 1 1 24 24 24 24 0 0 1-24-24z" style="opacity:.6"></path><path fill="currentColor" d="M120 80a24 24 0 1 0-24 24 24 24 0 0 0 24-24zm0 176a24 24 0 1 0-24 24 24 24 0 0 0 24-24zm0 176a24 24 0 1 0-24 24 24 24 0 0 0 24-24z"></path></g></svg></button>
+				<div>
+					<button type="button" onclick="askClearBrowserHistory()">Clear History</button>
+				</div>
+			</div>
+			<button type="button" class="comic-panel-close-btn"  id="b-h-p-close-btn" onclick="closeBrowserHistory()" title="Close Browser Histories | Ctrl+H"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><g><path fill="currentColor" d="M9.21,356.07a31.46,31.46,0,0,0,0,44.48l22.24,22.24a31.46,31.46,0,0,0,44.48,0L176,322.72,109.28,256ZM342.79,111.45,320.55,89.21a31.46,31.46,0,0,0-44.48,0L176,189.28,242.72,256,342.79,155.93a31.46,31.46,0,0,0,0-44.48Z" style="opacity:.6"></path><path fill="currentColor" d="M342.79,356.07a31.46,31.46,0,0,1,0,44.48l-22.24,22.24a31.46,31.46,0,0,1-44.48,0L9.21,155.93a31.46,31.46,0,0,1,0-44.48L31.45,89.21a31.46,31.46,0,0,1,44.48,0Z"></path></g></svg></button>
+			<div id="b-h-p-h-c"></div>
+			<div id="b-h-p-s-m">
+				<button type="button" onclick="unSelectAllBrowserHistory()">Cancel</button>
+				<button type="button" onclick="askForRemovingSelectedBrHistories()">Remove</button>
+			</div>
+			<div id="b-h-p-m-c">
+				<div onclick="this.parentElement.style.display = 'none'"></div>
+				<div id="b-h-p-m">
+					<button type="button" onclick="removeBrowserHistoryRow()">Remove</button>
+				</div>
+			</div>
+
+			<div id="b-h-o-d"></div>
+		</div>
+	</div>
+
+	<!-- Setting -->
+	<div id="setting-panel">
+
+		<br>
+
+		<p class="row-title">Theme</p>
+		<div class="row">
+			<div class="col-6 pr-5 pl-5">
+				<div class="input-row">
+					<label class="input-row-label">Theme</label>
+					<div class="input-row-selector" id="s_theme" value>
+						<div onclick="openSelect(this.parentElement)"></div>
+						<div class="input-row-selector-overflow">
+							<p onclick="select(this, 0)">Light Mode</p>
+							<p onclick="select(this, 1)">Dark Mode</p>
+						</div>
+						<span></span>
+					</div>
+					<p class="input-row-helper">The App Normal Theme.</p>
+				</div>
+
+				<br><br>
+
+				<label class="input-row-label d-block mb-3">Waiting Quality</label>
+				<div class="column-selector">
+					<div id="s_waiting_quality" value>
+						<button cs="0" onclick="columnSelector(this, 0);changeWaitingPreview(10)">Low</button>
+						<button cs="1" onclick="columnSelector(this, 1);changeWaitingPreview(20)">Medium</button>
+						<button cs="2" onclick="columnSelector(this, 2);changeWaitingPreview(30)">High</button>
+					</div>
+					<div id="waiting-preview">
+						<img class="spin" style="width:70px;height:70px;" src>
+					</div>
+				</div>
+				<p class="input-row-helper">The Waiting Quality (FPS)<br>Higher FPS = Smother, But More CPU Usage<br>Low => 10 FPS<br>Medium => 20 FPS (Recommend)<br>High => 30 FPS</p>
+			</div>
+
+			<div class="col-6 pr-5 pl-5">
+				<div class="input-row">
+					<label class="input-row-label">Pagination Theme</label>
+					<div class="input-row-selector" id="s_pagination_theme" value>
+						<div onclick="openSelect(this.parentElement)"></div>
+						<div class="input-row-selector-overflow">
+							<p onclick="select(this, 0)">Blue Mode</p>
+							<p onclick="select(this, 1)">Green Mode</p>
+							<p onclick="select(this, 2)">Red Mode</p>
+							<p onclick="select(this, 3)">Orange Mode</p>
+							<p onclick="select(this, 4)">Purple Mode</p>
+							<p onclick="select(this, 5)">Yellow Mode</p>
+							<p onclick="select(this, 6)">Gray Mode</p>
+						</div>
+						<span></span>
+					</div>
+					<p class="input-row-helper">The Downloaded Comic Pagination Theme.</p>
+				</div>
+
+				<br>
+
+				<div class="input-row">
+					<label class="input-row-label">Max Comics in a Page</label>
+					<input class="input-row-input" type="number" oninput="inputLimit(this, 800)" id="s_max_per_page">
+					<p class="input-row-helper">The Maximum Amount of Comics That Should Show in Offline Parts.<br>Min: 1, Max: 800</p>
+				</div>
+
+				<br><br>
+
+				<div class="input-row">
+					<div class="input-row-checkbox">
+						<label>Show Comics Pages</label>
+						<div>
+							<input type="checkbox" id="s_show_comic_pages">
+						</div>
+					</div>
+					<p class="input-row-helper">Allways show comic pages in offline overview (Disable Hover to show Comic Pages)</p>
+				</div>
+			</div>
+		</div>
+
+		<br><br><br>
+
+		<p class="row-title">Notification</p>
+		<div class="row">
+			<div class="col-6 pr-5 pl-5">
+				<div class="input-row">
+					<div class="input-row-checkbox">
+						<label>Download Finished</label>
+						<div>
+							<input type="checkbox" id="s_notification_download_finish">
+						</div>
+					</div>
+					<p class="input-row-helper">Show Notification When Download Finished.</p>
+				</div>
+			</div>
+
+			<div class="col-6 pr-5 pl-5">
+				<div class="input-row">
+					<div class="input-row-checkbox">
+						<label>Optimization Finished</label>
+						<div>
+							<input type="checkbox" id="s_notification_optimization_finish">
+						</div>
+					</div>
+					<p class="input-row-helper">Show Notification When Optimization Finished.</p>
+				</div>
+			</div>
+		</div>
+
+		<br><br><br>
+
+		<p class="row-title">Other</p>
+		<div class="row">
+			<div class="col-6 pr-5 pl-5">
+				<br>
+
+				<div class="input-row">
+					<div class="input-row-checkbox">
+						<label>Lazy Loading</label>
+						<div>
+							<input type="checkbox" id="s_lazy_loading">
+						</div>
+					</div>
+					<p class="input-row-helper">This Ability is Recommend.<br>Do not Start Loading The Images That aren't in viewport.</p>
+				</div>
+
+				<br><br>
+
+				<div class="input-row">
+					<label class="input-row-label">Max Multi-Downloading Comics</label>
+					<input class="input-row-input" type="number" oninput="inputLimit(this, 12)" id="s_download_limit">
+					<p class="input-row-helper">The Maximum Amount of Comics That Can Be Downloading At Same Time.<br>Min: 1, Max: 12</p>
+				</div>
+
+				<br><br>
+
+				<div class="input-row">
+					<p class="input-row-label">Download Location</p>
+					<div class="input-row-checkbox input-row-file">
+						<label title=""></label>
+						<div>
+							<button type="button" id="s_file_location" location="" onclick="if (!Downloader.HasDownload()) { GetFileLocationForInput(this) } else { PopAlert('You cannot Change Saving Location when downloading.', 'danger') }">Choose</button>
+						</div>
+					</div>
+					<p class="input-row-helper">Choose a Location For Saving Downloaded Comics.<br>If you Change The Location App will Reload.</p>
+				</div>
+
+				<br><br>
+
+				<div class="input-row">
+					<div class="input-row-checkbox">
+						<label>Show UnOptimize Comic</label>
+						<div>
+							<input type="checkbox" id="s_show_unoptimize">
+						</div>
+					</div>
+					<p class="input-row-helper">This Ability will Highlight UnOptimized Comics.</p>
+				</div>
+
+				<br><br>
+
+				<div class="input-row">
+					<div class="input-row-checkbox">
+						<label>Auto Close Optimize Panel</label>
+						<div>
+							<input type="checkbox" id="s_auto_close_optimize_panel">
+						</div>
+					</div>
+					<p class="input-row-helper">Automaticly Close Optimize Panel After Finishing Optimization.</p>
+				</div>
+
+				<br><br>
+
+				<div class="input-row">
+					<div class="input-row-checkbox">
+						<label>Auto Backup</label>
+						<div>
+							<input type="checkbox" id="s_auto_backup">
+						</div>
+					</div>
+					<p class="input-row-helper">Automaticly Backup Database When Closing App.</p>
+				</div>
+			</div>
+
+			<div class="col-6 pr-5 pl-5">
+				<br>
+
+				<div class="input-row">
+					<div class="input-row-checkbox">
+						<label>Fullscreen</label>
+						<div>
+							<input type="checkbox" id="s_full_screen">
+						</div>
+					</div>
+				</div>
+
+				<br><br>
+
+				<div class="input-row">
+					<label class="input-row-label">Downloading Image Quality</label>
+					<div class="input-row-selector" id="s_img_graphic" value>
+						<div onclick="openSelect(this.parentElement)"></div>
+						<div class="input-row-selector-overflow">
+							<p onclick="select(this, 0)">Low</p>
+							<p onclick="select(this, 1)">High</p>
+						</div>
+						<span></span>
+					</div>
+					<p class="input-row-helper">Recommend (High).<br>The Quality of Downloading Images.<br>(If High) App will check if Comic Have High Quality Image Then it will Download it, But If It Doesn't Then it will Download Low Quality.</p>
+				</div>
+
+				<br><br><br>
+				
+				<div class="input-row">
+					<div class="input-row-checkbox">
+						<label>Auto Remove Download</label>
+						<div>
+							<input type="checkbox" id="s_rdls">
+						</div>
+					</div>
+					<p class="input-row-helper">Automaticly Remove Downloaded Comic From Download Panel List</p>
+				</div>
+				
+				<br><br><br>
+
+				<div class="input-row">
+					<div class="input-row-checkbox">
+						<label>Auto Update Check</label>
+						<div>
+							<input type="checkbox" id="s_check_update">
+						</div>
+					</div>
+					<p class="input-row-helper">Check App Update After App Loading.</p>
+				</div>
+
+				<br><br><br>
+
+				<div class="input-row">
+					<div class="input-row-checkbox">
+						<label>Open Browser On Startup</label>
+						<div>
+							<input type="checkbox" id="s_open_br_startup">
+						</div>
+					</div>
+					<p class="input-row-helper">OpenUp The Browser on App Startup (After Loading Finished).</p>
+				</div>
+			</div>
+		</div>
+
+		<br><br><br><br>
+
+		<div class="row">
+			<div class="col-6 pr-5 pl-5">
+				<button onclick="saveSetting(false)" class="btn btn-primary" title="Save Setting | Ctrl+S">Save</button>
+				<button onclick="closeSetting()" class="btn btn-danger" title="Cancel | Esc">Cancel</button>
+				<button onclick="CheckUpdate()" class="btn btn-primary">Check Update</button>
+				<button onclick="BackUp()" class="btn btn-success" title="Backup your Databases so if it crash your are safe">Backup</button>
+			</div>
+			<div class="col-6 pr-5 pl-5"></div>
+		</div>
+	</div>
+
+	<!-- New Release -->
+	<div id="new-release">
+		<button type="button" onclick="this.parentElement.style.display='none'" id="release-close">X</button>
+		<p>Title</p>
+		<button type="button" onclick="UpdateApp()">Update</button>
+		<button type="button" onclick="UpdateNotes()">What's New?</button>
+	</div>
+
+	<!-- Release Note -->
+	<div id="release-note">
+		<div onclick="closeReleaseNote()"></div>
+		<div id="r-n-n-c">
+			<div id="r-n-n-v"></div>
+			<div id="r-n-n-n"></div>
+			<div></div>
+		</div>
+	</div>
+
+	<!-- New Release Note -->
+	<div id="nrelease-note"></div>
+
+	<!-- Export Panel -->
+	<div id="export-panel">
+		<div onclick="closeComicExportPanel()"></div>
+		<button type="button" onclick="closeComicExportPanel()">X</button>
+		<div>
+			<h1>Export Comic</h1>
+
+			<br>
+
+			<p>Export Location:</p>
+			<div class="ex-p-loc">
+				<input type="text" id="ex-p-l-input" placeholder="Export Location...">
+				<button type="button" onclick="exportComicBrowseLocation()">Browse</button>
+			</div>
+
+			<br>
+
+			<p>Export FileName:</p>
+			<input type="text" id="ex-p-l-fname" placeholder="FileName...">
+
+			<br>
+
+			<p style="text-align:center">Export Format:</p>
+			<div id="ex-p-f" f='zip'>
+				<div>
+					<input type="radio" name="ex-f" value="zip" onclick="this.parentElement.parentElement.setAttribute('f', 'zip')" checked>
+					<span>Zip</span>
+				</div>
+				<div>
+					<input type="radio" name="ex-f" value="cbr" onclick="this.parentElement.parentElement.setAttribute('f', 'cbr')">
+					<span>Cbr</span>
+				</div>
+			</div>
+
+			<p style="text-align:center;color:#f00;font-size:14px;margin-bottom:7px;"><strong>Warning:</strong> More Pages(Images) Comic have + space, will make Exporting Harder, so be careful, maybe App Crash!<br><strong>Note:</strong> For Faster Procress and Lower The RAM Usage and Lowering The Output Size, Please Optimize Comic First.</p>
+			<div style="display:flex;justify-content:center;align-items:center;width:100%">
+				<button class="btn btn-primary" type="button" onclick="checkExportComicInfo()" title="Export">Export</button>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Download Panel -->
+	<div id="download-panel">
+		<div id="d-p-m">
+			<button class="btn btn-primary" style="padding:7px 10px;margin-left:10px" onclick="Downloader.ResumeAll()">Play All</button>
+			<button class="btn btn-danger" style="padding:7px 10px" onclick="Downloader.PauseAll()">Pause All</button>
+
+			<div id="d-p-t" onclick="Downloader.OpenPanel()"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"></path></svg></div>
+
+			<div id="d-p-c-btn" onclick="Downloader.ClosePanel()"><svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><g><path fill="currentColor" d="M9.21,356.07a31.46,31.46,0,0,0,0,44.48l22.24,22.24a31.46,31.46,0,0,0,44.48,0L176,322.72,109.28,256ZM342.79,111.45,320.55,89.21a31.46,31.46,0,0,0-44.48,0L176,189.28,242.72,256,342.79,155.93a31.46,31.46,0,0,0,0-44.48Z" style="opacity:.5"></path><path fill="currentColor" d="M342.79,356.07a31.46,31.46,0,0,1,0,44.48l-22.24,22.24a31.46,31.46,0,0,1-44.48,0L9.21,155.93a31.46,31.46,0,0,1,0-44.48L31.45,89.21a31.46,31.46,0,0,1,44.48,0Z"></path></g></svg></div>
+		</div>
+		<div id="d-p-c"></div>
+	</div>
+</body>
+</html>

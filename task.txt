@@ -1,0 +1,176 @@
+DB => {
+	index => {
+		index = i
+		_id
+	}
+	comics 0 => {
+		name = n
+		images = i
+		ImagesCount = c
+		formats = f = []
+		site = s
+		post_id = p
+		optimized = o
+		groups = g
+		artists = a
+		parodies = d
+		tags = t
+		characters = h
+		languages = l
+		categories = e
+		_id
+	}
+	artists => [
+		'name'
+	]
+	tags => [
+		'name'
+	]
+	groups => [
+		'name'
+	]
+	parodies => [
+		'name'
+	]
+	collections => [
+		[
+			'title' = name => 0
+			[0,1,...] = ids => 1
+			'image.jpg' = image url => 2
+		]
+	]
+	have 1 => {
+		s: [SiteIndex...],
+		i: [Indexs...], => *
+		c: [IsComicDownloaded...] => 0 || 1
+	}
+	characters => [
+		'name'
+	]
+	languages => [
+		'name'
+	]
+	categories => [
+		'name'
+	]
+}
+
+Add Comic {
+	League Of Legends
+	Aroma Sensei
+	Search => ufos
+	Group => Tracy Scops
+	Artist => Nisego
+
+	nhentai =>
+	Comic => BADEND DREAMER
+	Artist => Abubu
+	Group => Behind Moon
+	Artist => Binbi
+	Artist => Chikiko
+	Search => Kemono DIRECT
+	Group => Aoba Q Madou
+	Artist => Momomo
+	Artist => Muneshiro
+	Comic => OneShota Byoutou
+
+	Artist => Miitoban
+	Artist => Okunoha
+	Artist => Takura Mahiro
+	Artist => Bakuya
+	Artist => Tsukudani
+	Artist => Nemu
+	Artist => Jun
+	Artist => Ganmarei
+
+	Artist => Ikezaki Misa
+	Artist => Aichi Shiho
+	Artist => xxzero
+
+	Tag => Bestiality
+	Tag => Insect
+
+	Check {
+	Kotatsu
+	COMIC BAVEL
+	Fella Pure
+	Artist > Ohtomo Takuji 
+	Artist > Puripuri Jet
+	Group > Topgun
+	Group > Eromazun
+	The Intoxicated Harbinger and Archon
+	Urabambi vol.34 Fuhrer befiehl
+	COMIC HOTMiLK Koime Vol. n
+	COMIC Megastore DEEP Vol. n
+	Henshin!? Sukekomas
+	}
+
+	Comic => [Togo Mito] Ookami-san to Ushi-san Ch. 1
+}
+
+Added To Version {
+	Fix Bug: Optimizing Comic ErrorList
+}
+
+Tasks => {
+	Add ability To Combine two download folder
+	Add API Updator
+	Add Ability To Rename During Download
+	Add Repair To Reload Image From Cache
+	Make Delete Image Rescroll
+	Fix KeyIndex Bug With Canceling Optimization
+	Fix Problem with Undownloaded Image Make Result said from 300MB to NAN undefined
+	Add Ability To See Image Aspectratio
+	Plans {
+		Add Download Log (Requested By SmartBadger)
+		Add Tab System In Personal Gallery (Requested By Zogarth23)
+		Add Ability To ReDownload an Image
+		Add Bookmark System To Browser
+		Add Ability To Edit Comic Infos Such as Tags/Artists/etc...
+	}
+	Make Mac and Linux version
+	Fix Browser Multi Change Page Problem
+	Add Download Log
+	Fix History
+	Optimize and Fix Events
+	Change Tab Remove Activating Next Tab
+	Add Downloaded Comic Site Icon In Comic Panel
+	Add Ability To Play Song
+	Add Email System
+	Make UI Beatiful
+	Add Search To History Panel
+	Add Auto Optimize Image After Download
+
+	Optimize Gifs { giflossy imagemin Packages }
+	Make New History System [ Indexing ]
+	Add Reset Setting Button
+	Make Tab Doplicator inset after tab
+	Add Auto Scroll Down for Comic Panel
+	Make Browser Selecting History Easier
+	Make New Browser Change Page System
+
+	Requests {
+		Add Site pururin.to (Requested By John Smith)
+		Add Ability To Control gallery with keyboard (Requested By wakeupjeff64)
+		import my own comics manually using images ia lready have on my computer. (Requested By wakeupjeff64)
+		Add tab system within your collection so you can have multiple comics open at once (Requested By Zogarth23)
+	}
+
+	Mybe in v2  {
+		Make Tab Resizing Work Better
+		Add Ability That Check Post Updated Image
+		Add Report Bug Button
+	}
+	
+	New Abilities For v2 {
+		Add Ability To Zoom in Image in Sldier
+		Add Jump to Picture to Comic Panel
+	}
+
+	Sites {
+		myhentaigallery.com
+		pururin.to
+		allporncomic.com
+		myhentaicomics.com
+	}
+}
