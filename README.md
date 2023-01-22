@@ -5,6 +5,6 @@ Credits to the original creator (RealLowMaster)
 [Original Repository](https://github.com/RealLowMaster/X-Comic-Downloader-Project)
 
 # Changes
-> Fixed xlecx
-> Added multporn
-> Removed nhentai
+- Fixed xlecx
+- Added multporn
+- Removed nhentai
